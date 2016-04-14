@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-compatible" content="IE=edge"/>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<link rel="stylesheet" type="text/css" href="currentBusInfo/reset.css"/>
+		<style type="text/css">
+			.clearfix:after, .clearfix:before {content: ""; display: block; height:0; clear:both; visibility: hidden;}
+			.clearfix { *zoom:1; }
+			ul,,ol,li{list-style: none;}
+			
+			/********header头部********/
+			body{margin: 0 auto;background-color: #f2f2f2;width:100%;overflow: hidden;}
+			header{width:100%;background-color: #5f91f9;padding: 10px 0;font-size: 1.4rem;}
+			header a{float: left;margin-top: -8px;}
+			header img{max-height: 46px;max-width: 46px;}
+			h1{width: 100%;text-align: center;margin-left: -46px;color: #fff;}
+			
+			/*************地图***************/
+			.ditu{width: 100%;height: 300px;background-image: url(img/1.0首页.png);}
+			
+			/*****************站点信息*****************/
+			.guijiao{overflow-y: scroll;z-index: 10;}
+			.guijiao li{padding: 5px 0;border-bottom: 1px solid #e2e2e2;background-color: #fff;}
+			.guijiao li:first-child{border-top: 1px solid #e2e2e2;}
+			.guijiao div{float: left;}
+			.guijiao .zhandian{font-size: 18px;line-height: 40px;width: 19%;text-align: center;color: #333;}
+			.guijiao .fangxiang{width: 50%;float: left;}
+			.guijiao .fangxiang h2{font-size: 16px;color: #666; display: inline-block;}
+			.guijiao .fujin{font-size: 14px;color: #aaa;float: right;width: 20%;height: 20px;margin-right: 20px;position: relative;
+			top: -10px;}
+			.guijiao .fujin div{border: 5px solid transparent;border-top-color: #666;position: absolute;top: 8px;right: -5px;}
+			.guijiao .fujin .up{border: 5px solid transparent;border-bottom-color: #666;position: absolute;top: 5px;right: -5px;}
+			
+			/*****************下拉菜单********************/
+			.guijiao ol{margin-bottom: -5px;}
+			.guijiao ol li{background-color: #f2f2fd;}
+			.guijiao ol li span{margin-left: 10px;}
+			.guijiao ol li p{display: inline-block;float: right;}
+			.guijiao ol li img{width: 25px;height: 25px;margin:0 15px;vertical-align: middle;}
+		</style>
+	</head>
+	<body>
+		
+			
+		<!--header-->
+		<header>
+			<a href="#" onClick="javascript :history.back(-1);"><img src="img/fanhui.png"/></a>
+			<h1>地铁线路图</h1>
+		</header>
+		
+			
+		<!--*************地*****图********************-->
+		<section class="ditu">
+
+		</section>
+		
+		
+			
+		<!--***轨***交**路***线***-->
+		<section class="guijiao">
+			<ul>
+				<li>
+					<div class="zhandian">站点1</div>
+					<h2 class="zhengxiang fangxiang">临港新城方向</h2>
+					<h2 class="fanxiang fangxiang">龙阳路方向</h2>
+					<div class="fujin">附近公交<div></div></div>
+					<section class="clearfix"></section>
+					<ol style="display: none;">
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+					</ol>
+				</li>
+				<li>
+					<div class="zhandian">站点2</div>
+					<h2 class="zhengxiang fangxiang">临港新城方向</h2>
+					<h2 class="fanxiang fangxiang">龙阳路方向</h2>
+					<div class="fujin">附近公交<div></div></div>
+					<section class="clearfix"></section>
+					<ol style="display: none;">
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+					</ol>
+				</li>
+				<li>
+					<div class="zhandian">站点3</div>
+					<h2 class="zhengxiang fangxiang">临港新城方向</h2>
+					<h2 class="fanxiang fangxiang">龙阳路方向</h2>
+					<div class="fujin">附近公交<div></div></div>
+					<section class="clearfix"></section>
+					<ol style="display: none;">
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+					</ol>
+				</li>
+				<li>
+					<div class="zhandian">站点4</div>
+					<h2 class="zhengxiang fangxiang">临港新城方向</h2>
+					<h2 class="fanxiang fangxiang">龙阳路方向</h2>
+					<div class="fujin">附近公交<div></div></div>
+					<section class="clearfix"></section>
+					<ol style="display: none;">
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+					</ol>
+				</li>
+				<li>
+					<div class="zhandian">站点5</div>
+					<h2 class="zhengxiang fangxiang">临港新城方向</h2>
+					<h2 class="fanxiang fangxiang">龙阳路方向</h2>
+					<div class="fujin">附近公交<div></div></div>
+					<section class="clearfix"></section>
+					<ol style="display: none;">
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+						<li><span>106路</span> <p><span>200米</span> <img src="img/daohang.png"/></p></li>
+					</ol>
+				</li>
+			</ul>
+		</section>
+		<script src="currentBusInfo/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="currentBusInfo/jquery.touch.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		//动态设置高度
+			var _xlh = $(window).height()-[$(".guijiao").offset().top-$(document).scrollTop()];
+			$(".guijiao").css("max-height",_xlh);
+			//点击下拉列表变色
+			$(".fujin").on("tap",function(){
+				$(this).parent().find("ol").toggle();
+				$(this).find('div').toggleClass("up");
+			})
+		</script>
+	</body>
+</html>

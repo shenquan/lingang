@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-compatible" content="IE=edge"/>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<link rel="stylesheet" type="text/css" href="currentBusInfo/reset.css"/>
+		<style type="text/css">
+			.clearfix:after, .clearfix:before {content: ""; display: block; height:0; clear:both; visibility: hidden;}
+			.clearfix { *zoom:1; }
+			body{margin: 0 auto;background-color: #f2f2f2;width:100%;overflow: hidden;}
+			header{width:100%;background-color: #5f91f9;padding: 10px 0;font-size: 24px;}
+			header a{float: left;margin-top: -8px;}
+			header img{max-height: 46px;max-width: 46px;}
+			header h1{width: 100%;text-align: center;margin-left: -46px;color: #fff;}
+			.tit{width: 80%;padding: 7px 24px;overflow: hidden;}
+			.tit p{font-size:16px;color: #999;}
+			.biaodan ul{background-color: #fff;}
+			.biaodan li{padding:15px 26px;border-top: 1px solid #e0e0e0;}
+			.biaodan li:last-child{border-bottom: 1px solid #e0e0e0;}
+			.biaodan .option{font-size: 16px;width: 75px;display:block;float: left;border-right: 1px solid #e0e0e0;
+			color:#333;}
+			.biaodan input{margin-left: 5px;font-size: 16px;font-family: "microsoft yahei";}
+			.biaodan input[type=text],.biaodan input[type=time]{width: 160px;border: none;outline: none;}
+			.biaodan label{margin-right: 11px;font-size: 16px;color: #333;}
+			.biaodan button{width: 91%;padding: 10px;font-size: 18px;background-color: #eebb45;margin: 10px auto 0;
+			border-radius:4px ;display:block;border: none;outline: none;font-family: "microsoft yahei";}
+			.notice{background-color: #fff;border-radius: 5px;width:89%;border: 1px solid #e0e0e0;margin: 10px auto 0;
+			padding: 5px;}
+			.notice h1{font-size: 14px;color: #333;}
+			.notice ul{margin-top: 5px;}
+			.notice img{width: 20px;height: 20px;vertical-align: middle;}
+			.notice span{font-size: 12px; color: #999;margin-left: 5px;}
+		</style>
+	</head>
+	<body>
+		<header>
+			<a href="#" onClick="javascript :history.back(-1);"><img src="img/fanhui.png"/></a>
+			<h1>定制公交</h1>
+		</header>
+		<section class="tit">
+			<p>您的出行请求</p>
+		</section>
+		<section class="biaodan">
+			<form action="##" method="post"id="form1"></form>
+			<ul>
+				<li><span class="option">起点</span><input type="text"placeholder="请输入起点" form="form1"required/></li>
+				<li><span class="option">终点</span><input type="text"placeholder="请输入终点" form="form1"required/></li>
+				<li><span class="option">出发时间</span><input type="time"placeholder="请输入出发时间" form="form1"required/></li>
+				<li><span class="option" style="border: none;line-height: 40px;">用途</span>
+					<div>
+						<label><input type="radio"value="1"name="use" form="form1"checked="checked"/>上班</label>
+						<label><input type="radio"value="2"name="use" form="form1"/>下班</label>
+						<label><input type="radio"value="3"name="use" form="form1"/>购物</label><br />
+						<label><input type="radio"value="4"name="use" form="form1"/>下班</label>
+						<label><input type="radio"value="5"name="use" form="form1"/>购物</label>
+					</div>
+				</li>
+				<li><span class="option">手机号码</span><input type="text"placeholder="请输入您的手机号" form="form1"
+					pattern="/^[0-9]{11}$/"required/></li>
+			</ul>
+			<button type="submit" form="form1">提交</button>
+		</section>
+		<section class="notice">
+			<h1>临港公交公告</h1>
+			<ul>
+				<li><img src="img/info.png"/><span>临港1路于3月1日起改道青海路</span></li>
+				<li><img src="img/info.png"/><span>临港3路于3月3日单向行驶至大明道</span></li>
+				<li><img src="img/info.png"/><span>临港5路于3月6日取消停靠乐西路东侧站点</span></li>
+			</ul>
+		</section>
+	</body>
+</html>

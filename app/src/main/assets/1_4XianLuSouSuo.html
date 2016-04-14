@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta http-equiv="X-UA-compatible" content="IE=edge"/>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<link rel="stylesheet" type="text/css" href="currentBusInfo/reset.css"/>
+		<style type="text/css">
+			.clearfix:after, .clearfix:before {content: ""; display: block; height:0; clear:both; visibility: hidden;}
+			.clearfix { *zoom:1; }
+			body{margin: 0 auto;background-color: #f2f2f2;width:100%;overflow: hidden;}
+			/********header********/
+			header{width:100%;background-color: #5f91f9;padding: 10px 0;font-size: 1.4rem;}
+			header a{float: left;margin-top: -8px;}
+			header img{max-height: 46px;max-width: 46px;}
+			h1{width: 100%;text-align: center;margin-left: -46px;color: #fff;}
+			.search{padding: 24px 25px;background-color: #fff;}
+			
+			/*======*搜**索**框*======*/
+			.search div{width: 73%;border: 1px solid #d3d3d3;height: 35px;line-height: 35px;border-radius: 35px;
+			float: left;}
+			.search div img{vertical-align: middle;display: inline-block;width: 35px;height: 35px;}
+			.search div input{border: none;outline: none;font-size: 16px;display: inline-block;width: 72%;}
+			.search button{outline: none;border: none;background-color: transparent;}
+			.search .search-btn{width: 20%;background-color: #5f91f9;height: 35px;line-height: 35px;border-radius: 35px;
+			font-size:16px;float: right;display:block;color: #fff;font-family: "microsoft yahei";}
+			
+			/********=路==线==信==息=*************/
+			.xianlu{background-color: #fff;margin-top: 10px;overflow-y: scroll;}
+			.xianlu li{border-top: 1px solid #dedede;padding: 5px;}
+			.xianlu li a{text-decoration: none;display: inline-block;width: 100%;}
+			.xianlu li img{vertical-align: middle;width: 40px;height: 40px;}
+			.xianlu li span{font-size: 18px;margin-top: 20px;vertical-align: middle;color: #333;}
+			.xianlu li p{margin-left: 40px;color: #aaa;font-size: 12px;}
+		</style>
+	</head>
+	<body>
+		<!--header-->
+		<header>
+			<a href="#" onClick="javascript :history.back(-1);"><img src="img/fanhui.png"/></a>
+			<h1>所有实时线路</h1>
+		</header>
+		<!--=====搜索框======-->
+		<section class="search">
+			<form action="##">
+				<div class="">
+					<img src="img/icon_search.png"/>
+					<input type="search" name="xianlu" placeholder="请输入线路" x-webkit-grammar="builtin:search" lang="zh-CN">
+				</div>
+			  	<button type="submit"class="search-btn">搜索</button>
+		  	</form>
+		  	<section class="clearfix"></section>
+		</section>
+		
+		<!--线路信息-->
+		<section class="xianlu">
+			<ul>
+				<li><a href="1_4_1DaoHang.html"><img src="img/bus2.png"/><span class="hao">129路</span><p>开往&nbsp;鳌兴路</p></a></li>
+				<li><a href="1_4_1DaoHang.html"><img src="img/bus2.png"/><span class="hao">108路</span><p>开往&nbsp;火车站</p></a></li>
+				<li><a href="1_4_1DaoHang.html"><img src="img/bus2.png"/><span class="hao">88路</span><p>开往&nbsp;海洋公园</p></a></li>
+				<li><a href="1_4_1DaoHang.html"><img src="img/bus2.png"/><span class="hao">312路</span><p>开往&nbsp;软件园C区</p></a></li>
+				<li><a href="1_4_1DaoHang.html"><img src="img/bus2.png"/><span class="hao">129路</span><p>开往&nbsp;鳌兴路</p></a></li>
+				<li><a href="1_4_1DaoHang.html"><img src="img/bus2.png"/><span class="hao">108路</span><p>开往&nbsp;火车站</p></a></li>
+				<li><a href="1_4_1DaoHang.html"><img src="img/bus2.png"/><span class="hao">88路</span><p>开往&nbsp;海洋公园</p></a></li>
+				<li><a href="1_4_1DaoHang.html"><img src="img/bus2.png"/><span class="hao">312路</span><p>开往&nbsp;软件园C区</p></a></li>
+			</ul>
+		</section>
+	</body>
+	<script src="currentBusInfo/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+	//**********动态设置高度*********==
+	var _xlh = $(window).height()-[$(".xianlu").offset().top-$(document).scrollTop()];
+	$(".xianlu").css("height",_xlh);
+	
+	//******点击检索***********
+	$(".search .search-btn").on("click",function(){
+		var _len = $(".xianlu li").length;
+		for(var i=0;i<_len;i++){
+			var _text = $(".xianlu").find(".hao").eq(i).text();
+			var _Len = _text.length;
+			var _num = _text.substring(0,_Len-1);
+			if($(".search input").val()!=_num){
+				$(".xianlu li").eq(i).css("display","none");
+			}else{
+				$(".xianlu li").eq(i).css("display","block");
+			}
+		}
+	});
+		
+		
+		
+	</script>
+</html>

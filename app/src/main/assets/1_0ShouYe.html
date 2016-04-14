@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-compatible" content="IE=edge"/>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<link rel="stylesheet" type="text/css" href="currentBusInfo/reset.css"/>
+		<link rel="stylesheet" type="text/css" href="currentBusInfo/pullToRefresh.css"/>
+		<style type="text/css">
+			.clearfix:after, .clearfix:before {content: ""; display: block; height:0; clear:both; visibility: hidden;}
+			.clearfix { *zoom:1; }
+			body{margin: 0 auto;width:100%;overflow: hidden;}
+			
+			/*====**************header头部****************====*/
+			header{width:100%;background-color: #5f91f9;padding: 10px 0;font-size: 24px;}
+			header h1{width: 100%;text-align: center;color: #fff;}
+			.search{padding: 10px;line-height: 35px;background-color: #f2f2f2;}
+			.search span{font-size: 14px;color: #333;float: left;margin-right: 5px;}
+			.search .sousuokuang{border: 1px solid #d3d3d3;float:left;width: 60%;border-radius: 30px;padding: 3px;}
+			.search .sousuokuang input{width:68%;height: 25px;float: left;margin-left: 15px;border: none;
+			outline: none;background-color: transparent;}
+			.search .sousuokuang input[type=image]{width: 25px;height: 25px;float: right;}
+			.search a{width: 21%;font-size: 14px;float: right;text-decoration: none;border-left: 1px solid #d8d9da;
+			padding-left: 8px;display: block;color: #74a5ed;}
+			
+			/*==========================地图=============================*/
+			.map{background-color: #fff;}
+			
+			/*************************选项卡*********************************/
+			.container{width: 100%;border-top: 1px solid #cdcdcd;position: fixed;bottom: 290px;}
+			.container .tab{padding: 5px 0 0;background-color: #fff;border-bottom: 1px solid #cdcdcd;}
+			.container .tab li{float: left;width: 33.3%;text-align: center;font-size: 14px;}
+			.container .tab li p{margin-bottom: 5px;}
+			.container .tab li+li p{border-left: 1px solid #d8d9da;}
+			.container .tab li span{border: 2px solid #8eb9f9;display: block;}
+			.container .list{overflow:hidden;}
+			/*.container .list>ul>li{padding: 5px;}*/
+			
+			/***********公交部分*************/
+			.container .gongjiao li{background-color: #fff;border: 1px solid #ddd;padding: 10px;}
+			.container .gongjiao p,.container .gongjiao span,.container .gongjiao em,.container .gongjiao num,
+			.container .gongjiao img{vertical-align: middle;}
+			.container .gongjiao p{display: inline-block;color: #333;font-size: 16px;width: 20%;}
+			.container .gongjiao span{color: #ccc;font-size: 11px;}
+			.container .gongjiao em{color: #bbb;font-size: 12px;margin-left: 5px;width: 40%;display: inline-block;overflow: hidden;}
+			.container .gongjiao label{float: right;}
+			.container .gongjiao num{color: #999;font-size: 12px;margin-right: 10px;}
+			.container .gongjiao img{width: 30px;height: 30px;float: right;}
+			
+			/*********************自行车租赁部分***********************/
+			.container .zixingche li{background-color: #fff;border: 1px solid #ddd;padding: 10px;}
+			.container .zixingche label{float: left;width: 80%;}
+			.container .zixingche img{float: right;}
+			.container .zixingche .p1 span{color: #333;font-size: 16px;}
+			.container .zixingche .p1 em{color: #999;font-size: 12px;float: right;}
+			.container .zixingche .p2 span{color: #bbb;font-size: 12px;}
+			.container .zixingche .p2 em{margin-left: 20px;color: #f60;font-size: 12px;}
+			
+			/*=========================收藏部分=============================*/
+			.container .shoucang{background-color: #fff;margin: 0 10px;border: 1px solid #e0e0e0;
+			padding: 0 !important;margin: 10px;}
+			.container .shoucang>div{border-bottom: 1px solid #ddd;padding: 5px;position: relative;}
+			.container .shoucang>div img{width: 25px;height: 25px;vertical-align: middle;}
+			.container .shoucang>div p{float: right;}
+			.container .shoucang>div p>img{margin-left: 10px;}
+			
+			/*====收藏下拉菜单===*/
+			.container .shoucang .xiala{background-color: #fff;right: 0;top: 35px;position: absolute;z-index: 20;
+			border: 1px solid #ddd;width: 99.5%;background-color: #f2f2f2;color: #666;}
+			.container .shoucang div ul li{border-bottom: 1px solid #ddd;padding: 3px 5px;font-size: 14px;
+			}
+			/*=========收藏============*/
+			#shoucang div span{vertical-align: middle;font-size: 20px;margin-left: 5px;}
+			#shoucang ul>li{padding:5px;border-bottom: 1px solid #ddd;background-color: #fff;}
+			#shoucang ul>li>label{float: left;}
+			#shoucang ul>li>label span{font-size: 16px;color: #333;}
+			#shoucang ul>li>label p{font-size: 12px;color: #aaa;float: none;}
+			#shoucang ul>li>span{float: right;line-height: 35px;font-size: 14px;color: #aaa;
+			border-left: 1px solid #ddd;padding-left: 15px;}
+			/*************************footer尾部************************/
+			footer{background-color: #fff !important;width: 100%;padding: 10px;position: fixed;bottom:0;margin-top: -70px;z-index: 100;
+			border-top: 1px solid #cdcdcd;}
+			footer li{float: left;width: 33.3%;text-align: center;line-height: 10px;}
+			footer li a{text-decoration: none;}
+			footer li img{width: 40px;height: 40px;}
+			footer li p{font-size: 14px;color: #9d9d9d;}
+		</style>
+		<style type="text/css">
+			.iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+			.iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;
+			word-wrap:break-word}
+		</style>
+			<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=6jkrxPyM6pNbrqGc4ZamLh8QsUR9VApU"></script>
+	</head>
+	<body>
+		<!--***********************header头部**************************-->
+		<header>
+			<h1>临港出行</h1>
+		</header>
+		<!--=======================线路、站点搜索栏============================-->
+		<section class="search">
+			<span>临港</span>
+			<div class="sousuokuang">
+				<form action="1_4XianLuSouSuo.html" id="search" method="post"></form>
+				<input type="search" name="search" form="search" placeholder="公交线路、站点" />
+				<input type="image"form="search" src="img/icon_search.png"/>
+			</div>
+			<a href="1_1_1ShiShiGongJiao.html">实时公交</a>
+			<div class="clearfix"></div>
+		</section>
+		<!--============================地图====================================-->
+		<section class="map">
+			<div style="width:100%;height:100%;border:#ccc solid 1px;" id="allmap"></div>
+		</section>
+		<!--=========================选项卡====================================-->
+		<section class="container">
+			<div class="tab">
+				<ul>
+					<li><p>附近公交</p><span></span></li>
+					<li><p>自行车租赁</p><span style="display: none;"></span></li>
+					<li><p>收藏</p><span style="display: none;"></span></li>
+					<div class="clearfix"></div>
+				</ul>
+			</div>
+			<div class="list">
+				<ul>
+					<!--=================公交===================-->
+					<li id="wrapper">
+						<ul class="gongjiao">
+							<li><p>129路</p><span>&rarr;开往</span><em>鳌兴路</em><label><num>100米</num><a href="##"><img src="img/daohang.png"/></a></label></li>
+							<li><p>161路</p><span>&rarr;开往</span><em>火车南站</em><label><num>500米</num><a href="##"><img src="img/daohang.png"/></a></label></li>
+							<li><p>109路</p><span>&rarr;开往</span><em>三盛国际公园</em><label><num>700米</num><a href="##"><img src="img/daohang.png"/></a></label></li>
+							<li><p>320路</p><span>&rarr;开往</span><em>洪山桥</em><label><num>800米</num><a href="##"><img src="img/daohang.png"/></a></label></li>
+							<li><p>102路</p><span>&rarr;开往</span><em>森林公园</em><label><num>800米</num><a href="##"><img src="img/daohang.png"/></a></label></li>
+						</ul>
+					</li>
+					<!--=====================自行车租赁=======================-->
+					<li id="bicycle" style="display: none;">
+						<ul class="zixingche"style="top: 40px;">
+							<li>
+								<label>
+									<p class="p1"><span>临港1路租赁点</span><em>500米</em></p>
+									<p class="p2"><span>共30辆</span><em>10车空闲</em><em>20锁柱空闲</em></p>
+								</label>
+								<img src="img/daohang.png"/><div class="clearfix"></div>
+							</li>
+							<li>
+								<label>
+									<p class="p1"><span>临港2路租赁点</span><em>1000米</em></p>
+									<p class="p2"><span>共20辆</span><em>5车空闲</em><em>15锁柱空闲</em></p>
+								</label>
+								<img src="img/daohang.png"/><div class="clearfix"></div>
+							</li>
+							<li><label>
+									<p class="p1"><span>临港3路租赁点</span><em>500米</em></p>
+									<p class="p2"><span>共30辆</span><em>5车空闲</em><em>25锁柱空闲</em></p>
+								</label>
+								<img src="img/daohang.png"/><div class="clearfix"></div>
+							</li>
+							<li><label>
+									<p class="p1"><span>临港4路租赁点</span><em>500米</em></p>
+									<p class="p2"><span>共50辆</span><em>35车空闲</em><em>15锁柱空闲</em></p>
+								</label>
+								<img src="img/daohang.png"/><div class="clearfix"></div>
+							</li>
+							<li>
+								<label>
+									<p class="p1"><span>临港5路租赁点</span><em>500米</em></p>
+									<p class="p2"><span>共30辆</span><em>10车空闲</em><em>20锁柱空闲</em></p>
+								</label>
+								<img src="img/daohang.png"/><div class="clearfix"></div>
+							</li>
+						</ul>
+					</li>
+					
+					<!--======================收藏======================-->
+					<li class="shoucang" style="display: none;position: absolute;width: 95%;">
+						<div><img src="img/shoucang-icon.png"/><span id="xx">上班</span> 
+							<p><a href=""><img src="img/xiaoxi.png"/></a><img class="xuan" src="img/xuanxiang.png"/></p>
+							<ul class="xiala" style="display: none;">
+								<li>上班</li>
+								<li>回家</li>
+								<li>购物</li>
+							</ul>
+						</div>
+						<div class=""style="position: relative;overflow: hidden;padding: 0;">
+							<section id="shoucang" style="height: 175px;">
+							<ul>
+								<li><label><span>129路</span><p>开往 鳌兴路</p></label><span>等待开车</span>
+									<div class="clearfix"></div>
+								</li>
+								<li><label><span>312路</span><p>开往 软件园C区</p></label><span>等待开车</span>
+									<div class="clearfix"></div>
+								</li>
+								<li><label><span>108路</span><p>开往 火车站</p></label><span>等待开车</span>
+									<div class="clearfix"></div>
+								</li>
+								<li><label><span>108路</span><p>开往 火车站</p></label><span>等待开车</span>
+									<div class="clearfix"></div>
+								</li>
+								<li><label><span>108路</span><p>开往 火车站</p></label><span>等待开车</span>
+									<div class="clearfix"></div>
+								</li>
+							</ul>
+						</section>
+						</div>
+						
+					</li>
+				</ul>
+			</div>
+		</section>
+		<!--=====footer尾部菜单============-->
+		<footer>
+			<ul>
+				<li><img src="img/chuxing.png"/><p style="color: #74a5ed;">出行</p></li>
+				<li><img src="img/weigongjiao2.png"/><p>微公交</p></li>
+				<li><a href="3_0 SheZhi.html"><img src="img/shezhi2.png"/><p>设置</p></a></li>
+			</ul>
+		</footer>
+		<script src="currentBusInfo/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="currentBusInfo/jquery.touch.js" type="text/javascript" charset="utf-8"></script>
+		
+		<script src="currentBusInfo/pullToRefresh.js" type="text/javascript" charset="utf-8"></script>
+		<script src="currentBusInfo/iscroll.js" type="text/javascript" charset="utf-8"></script>
+		<!--*****************解决软键盘弹出顶起fixed定位元素的问题***********************-->
+		<script type="text/javascript">
+			$('input[type=search]').bind('focus',function(){  
+				$(".container").css('position','static');
+	            $('footer').css({'position':'static','margin-top':'220px','background-color':'#fff'});  
+	            //或者$('#viewport').height($(window).height()+'px');  
+	        }).bind('blur',function(){  
+	        	$(".container").css({'position':'fixed','bottom':'290'});
+	            $('footer').css({'position':'fixed','bottom':'0','margin-top':'-70px'});
+	            //或者$('#viewport').height('auto');  
+	        });  
+		</script>
+<!--**************************加载地图********************************-->
+		<!--<script type="text/javascript">
+		   // 百度地图API功能
+	var map = new BMap.Map("allmap");    // 创建Map实例
+	map.centerAndZoom(new BMap.Point(116.404, 39.915), 11);  // 初始化地图,设置中心点坐标和地图级别
+	map.addControl(new BMap.MapTypeControl());   //添加地图类型控件
+	map.setCurrentCity("北京");          // 设置地图显示的城市 此项是必须设置的
+	map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+		</script>
+		-->
+		<!--**************地图定位*******************-->
+		<script type="text/javascript">
+			// 百度地图API功能
+			var map = new BMap.Map("allmap");
+			var point = new BMap.Point(116.331398,39.897445);
+			map.centerAndZoom(point,12);
+		
+			var geolocation = new BMap.Geolocation();
+			geolocation.getCurrentPosition(function(r){
+				if(this.getStatus() == BMAP_STATUS_SUCCESS){
+					var mk = new BMap.Marker(r.point);
+					map.addOverlay(mk);
+					map.panTo(r.point);
+//					alert('您的位置：'+r.point.lng+','+r.point.lat);
+				}
+				else {
+					alert('failed'+this.getStatus());
+				}        
+			},{enableHighAccuracy: true})
+			//关于状态码
+			//BMAP_STATUS_SUCCESS	检索成功。对应数值“0”。
+			//BMAP_STATUS_CITY_LIST	城市列表。对应数值“1”。
+			//BMAP_STATUS_UNKNOWN_LOCATION	位置结果未知。对应数值“2”。
+			//BMAP_STATUS_UNKNOWN_ROUTE	导航结果未知。对应数值“3”。
+			//BMAP_STATUS_INVALID_KEY	非法密钥。对应数值“4”。
+			//BMAP_STATUS_INVALID_REQUEST	非法请求。对应数值“5”。
+			//BMAP_STATUS_PERMISSION_DENIED	没有权限。对应数值“6”。(自 1.1 新增)
+			//BMAP_STATUS_SERVICE_UNAVAILABLE	服务不可用。对应数值“7”。(自 1.1 新增)
+			//BMAP_STATUS_TIMEOUT	超时。对应数值“8”。(自 1.1 新增)
+		</script>
+
+		<script type="text/javascript">
+//			动态设置高度
+			var _xlh = $(window).height()-[$(".list").offset().top-$(document).scrollTop()]-70;
+			$(".list>ul>li").css("height",_xlh);
+			var map_h = $(window).height()-428;
+			$(".map").css("height",map_h);
+		</script>
+		<!--**********选项卡切换**************-->
+		<script type="text/javascript">
+			$(".tab li").on("tap",function(){
+				$(this).find("span").show();
+				$(this).siblings().find("span").hide();
+				$(".list>ul>li").hide().eq($(this).index()).show();
+			});
+			
+			//**************下拉栏显示开关***************
+			$(".xuan").on("tap",function(){
+				$(".xiala").slideToggle();
+			})
+			//***************下拉选项选择***************
+			$(".xiala li").on("tap",function(){
+				$(this).css("background-color","#ddd").siblings().css("background-color","#f2f2f2");
+				$("#xx").text($(this).text());
+				$(".xiala").hide();
+			})
+		</script>
+		<!--上拉加载更多-->
+		<script type="text/javascript">
+		//公交
+			refresher.init({
+		    id:"wrapper",
+		    pullDownAction:Refresh,        
+		    pullUpAction:Load                                                                             
+		    });    
+		//自行车
+			refresher.init({
+		    id:"bicycle",
+		    pullDownAction:bRefresh,
+		    pullUpAction:bLoad                                                                             
+		    });    
+		//收藏
+			refresher.init({
+		    id:"shoucang",
+		    pullDownAction:sRefresh,
+		    pullUpAction:sLoad                                                                             
+		    });    
+		    
+		    //******公交部分*******
+		    //==================下拉==============
+		    function Refresh() {																
+				setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+					var el, li, i;																		
+					el =document.querySelector("#wrapper ul");					
+					//这里写你的刷新代码				
+					setTimeout(function () {
+						wrapper.refresh();
+						document.getElementById("wrapper").querySelector(".pullDownLabel").innerHTML="";								
+						},1000);//模拟qq下拉刷新显示成功效果
+					/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+				}, 1000);
+			}
+//		    //*******************上拉*********************===
+		    function Load() {
+		    	setTimeout(function () {// <-- Simulate network congestion, remove setTimeout from production!
+					var el, li, i;
+					el =document.querySelector("#wrapper ul");
+					for (i=0; i<2; i++) {
+						li = document.createElement('li');
+						li.innerHTML="<p>129路</p><span>&rarr;开往</span><em>鳌兴路</em><label><num>100米</num><img src='img/daohang.png'/></label>"
+						el.appendChild(li, el.childNodes[0]);
+					}
+					wrapper.refresh();/****remember to refresh after action completed！！！   ---id.refresh(); --- ****/
+				}, 1000);
+		    }
+		    
+		    //*********自行车租赁部分***************
+		    function bRefresh(){
+		    	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+					var el, li, i;																		
+					el =document.querySelector("#bicycle ul");					
+					//这里写你的刷新代码				
+					setTimeout(function () {
+						bicycle.refresh();
+						document.getElementById("bicycle").querySelector(".pullDownLabel").innerHTML="";								
+						},1000);//模拟qq下拉刷新显示成功效果
+					/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+				}, 1000);
+		    }
+		    function bLoad(){
+		    	setTimeout(function(){
+		    		var el,li,i;
+		    		el=document.querySelector("#bicycle ul");
+		    		for(i=0;i<2;i++){
+		    			li = document.createElement('li');
+		    			li.innerHTML="<label><p class='p1'><span>临港3路租赁点</span><em>500米</em></p><p class='p2'><span>共30辆</span><em>5车空闲</em><em>25锁柱空闲</em></p></label><img src='img/daohang.png'/><div class='clearfix'></div>"
+		    			el.appendChild(li,el.childNodes[0]);
+		    		}
+		    		bicycle.refresh();
+		    	},1000);
+		    }
+		    //***********收藏部分**************
+		    function sRefresh(){
+		    	setTimeout(function () {	// <-- Simulate network congestion, remove setTimeout from production!
+					var el, li, i;																		
+					el =document.querySelector("#bicycle ul");					
+					//这里写你的刷新代码				
+					setTimeout(function () {
+						bicycle.refresh();
+						document.getElementById("bicycle").querySelector(".pullDownLabel").innerHTML="";								
+						},1000);//模拟qq下拉刷新显示成功效果
+					/****remember to refresh after  action completed！ ---yourId.refresh(); ----| ****/
+				}, 1000);
+		    }
+		    function sLoad(){
+		    	setTimeout(function(){
+		    		var el,li,i;
+		    		el=document.querySelector("#shoucang ul");
+		    		for(i=0;i<2;i++){
+		    			li = document.createElement('li');
+		    			li.innerHTML="<label><span>108路</span><p>开往 火车站</p></label><span>等待开车</span><div class='clearfix'></div>"
+		    			el.appendChild(li,el.childNodes[0]);
+		    		}
+		    		shoucang.refresh();
+		    	},1000);
+		    }
+		</script>
+	</body>
+</html>

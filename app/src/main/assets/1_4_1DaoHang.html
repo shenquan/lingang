@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-compatible" content="IE=edge"/>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<link rel="stylesheet" type="text/css" href="currentBusInfo/reset.css"/>
+		<style type="text/css">
+			.clearfix:after, .clearfix:before {content: ""; display: block; height:0; clear:both; visibility: hidden;}
+			.clearfix { *zoom:1; }
+			body{margin: 0 auto;background-color: #f2f2f2;width:100%;overflow: hidden;}
+			
+			/***************header头部***************/
+			header{width:100%;background-color: #fff;padding: 10px 0;font-size: 24px;}
+			header a{float: left;margin-top: -8px;}
+			header img{max-height: 46px;max-width: 46px;}
+			header h1{width: 100%;text-align: left;margin-left: -46px;color: #333;}
+			
+			/*************起止站及首末班次时间************/
+			.qizhizhan{background-color: #fff;padding: 10px 24px;border: 1px solid #cdcdcd;border-left: none;
+			border-right: none;}
+			.qizhizhan span{font-size: 18px;color: #000;}
+			.qizhizhan p{font-size: 12px;color: #999;}
+			
+			/***********车次信息*********/
+			.checi{width: 100%;overflow: hidden;}
+			.checi ul{width: 85%;margin: 10px auto;background-color: #fff;padding: 10px;border-radius: 6px;}
+			.checi ul li{float: left;width: 33%;text-align: center;border-left: 1px solid #d8d9da;}
+			.checi ul li:first-child{border: none;}
+			.checi ul li span{color: #5F91F9;font-size: 16px;}
+			.checi ul li span b{font-size: 24px;font-weight: 400;}
+			.checi ul li p{font-size: 14px;color: #999;}
+			
+			/****************路线图****************/
+			.luxiantu{width: 100%;overflow: hidden;position: relative;height: 600px;}
+    		#mycanvas{position: absolute;top: 0;}
+			
+			/**********尾部菜单***********/
+			footer{background-color: #fff;width: 100%;padding-bottom: 10px;position: fixed;top:100%;margin-top: -60px;
+			border-top: 1px solid #cdcdcd;}
+			footer li{float: left;width: 33.3%;text-align: center;line-height: 10px;}
+			footer li a{text-decoration: none;}
+			footer li img{width: 40px;height: 40px;}
+			footer li span{font-size: 16px;color: #9d9d9d;}
+			
+			/************收藏弹框*****************/
+			.zhezhaoceng{background-color: rgba(0,0,0,0.4);width: 100%;height: 100%;position: fixed;top: 0;}
+			.shoucanglan{position: fixed;background-color: #fff;bottom: 0;width: 100%;}
+			.shoucanglan h2{text-align: center;font-size: 22px;color:#000;height: 50px;line-height: 50px;}
+			.shoucanglan hr{border: 1px solid #dbdbdb;margin: 0;}
+			.shoucanglan input[type=radio]{width: 20px;height: 20px;vertical-align: middle;}
+			.shoucanglan label{font-size: 22px;color: #333;margin:10px 0 8px 15px;display: inline-block;vertical-align: middle;}
+			.shoucanglan .quxiao{border-right: 1px solid #dbdbdb;width: 50%;display: inline-block;
+			text-align: center;color:#5f91f9;padding: 10px 0;font-size: 22px;}
+			.shoucanglan input[type=submit]{background-color: #fff;border: none;outline: none;font-size: 22px;
+			width: 48%;padding: 10px 0;color:#5f91f9;font-family: "Microsoft YaHei";}
+			.shoucanglan input[type=text]{border: 1px solid #666;margin-left: 5px;height: 30px;font-size: 22px;
+			font-family: "microsoft yahei";}
+		</style>
+	</head>
+	<body>
+		
+			
+		<!--*****header头部*******-->
+		<header>
+			<a href="#" onClick="javascript :history.back(-1);"><img src="img/fanhui2.png"/></a>
+			<h1>129路</h1>
+		</header>
+		
+			
+		<!--========当前路线始末站点及首末车时间=========-->
+		<section class="qizhizhan">
+			<span>动物园&#8594;融侨新区</span><p>首末车<b>06:00-22:30</b></p>
+		</section>
+		
+			
+		<!--当前路线最近三个班次信息-->
+		<section class="checi">
+			<ul>
+				<li><span><b>2</b>分</span><p>1站</p></li>
+				<li><span><b>5</b>分</span><p>7站</p></li>
+				<li><span><b>25</b>分</span><p>12站</p></li>
+				<div class="clearfix"></div>
+			</ul>
+		</section>
+		
+			
+		<!--===============================公交路线=========================================-->
+		<section class="luxiantu">
+			<canvas id="mycanvas"height="600px"></canvas>
+		</section>
+		
+			
+		<!--footer尾部菜单-->
+		<footer>
+			<ul>
+				<li>
+					<a href="" class="shoucang">
+						<img src="img/shoucang.png"/><br />
+						<span>收藏</span>
+					</a>
+				</li>
+				<li>
+					<a href="" class="trigger">
+						<img src="img/qiehuanfangxiang.png"/><br />
+						<span>切换方向</span>
+					</a>
+				</li>
+				<li>
+					<a href="" class="shuaxin">
+						<img src="img/shuaxin.png"/><br />
+						<span>刷新</span>
+					</a>
+				</li>
+			</ul>
+			<div class="clearfix"></div>
+		</footer>
+		
+			
+		<!--==========收=藏=功=能=弹=框============-->
+		<div class="zhezhaoceng" style="display: none;">
+			<section class="shoucanglan">
+				<h2>选择标签</h2>
+				<hr />
+				<form action="" method="post">
+					<label><input type="radio" name="shoucang" value="0" checked="checked"/>&nbsp;上班</label><br />
+					<label><input type="radio" name="shoucang" value="1"/>&nbsp;回家</label><br />
+					<label><input type="radio" name="shoucang" value="2"/>新建标签</label><br />
+					<hr />
+					<a class="quxiao">取消</a>
+					<input type="submit" value="确定"/>
+				</form>
+			</section>
+		</div>
+		<script src="currentBusInfo/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script src="currentBusInfo/jquery.touch.js" type="text/javascript" charset="utf-8"></script>
+		<!--***********************收藏功能 ********************************-->
+		<script type="text/javascript">
+			$(".shoucanglan").find("input[type=submit]").on("tap",function(){
+				
+			})
+		</script>
+		<script type="text/javascript">
+			var str = ['动物园','河南北路海宁路','海宁路四川北路','吴淞路海宁路','四平路溧阳路','欧阳路吉祥路',
+			'欧阳路四达路','欧阳路祥德路','欧阳路大连西路','大连西路曲阳路','玉田路曲阳路','屏山','卫生厅','鼓楼',
+			'东街口','旗汛口','省立医院','五四路口','外贸中心酒店','古三座','树兜','赤峰路曲阳路',
+			'曲阳路中山北二路','融侨新区' ],len = str.length;
+			$("#mycanvas").attr('width',len*60+30);
+			var $ctx = document.getElementById("mycanvas").getContext('2d');
+	
+	
+	//*******************公*交*车*位*置********************
+//		获取用户所在站点下标
+			var userSite = "外贸中心酒店";   //用户所在站点名
+			var j=0;
+			for(var i in str){
+			  if(str[i]==userSite){
+			    j=i;            //j就是下标
+			  }
+			}
+		//绘制公交图标
+			//图片预加载
+			var $pic = new Image();
+			$pic.onload = function(){
+				//********建立遍历方法将当前线路的公交图标循环插入************
+				$ctx.drawImage($pic,1115,20,32,20);  //每个站点之间相隔60，第一个初始值为35，中间显示加30
+				$ctx.drawImage($pic,695,20,32,20);
+				$ctx.drawImage($pic,395,20,32,20);
+			}
+			//为了更好地兼容IE，将src写在onload后面
+			$pic.src="img/bus.png";
+			
+			//建立函数
+			function site(x,i,Str,j){
+				this.x = x;
+				this.i = i;
+				this.Str = Str;
+				this.j = j;
+				this.draw = function(){
+					//保存之前的画布内容
+					$ctx.save();
+					//重置坐标原点
+					$ctx.translate(x,60);
+					//绘制站点标记
+					$ctx.beginPath();
+					$ctx.fillStyle="#fff";
+					$ctx.arc(x+10,0,13,0,2*Math.PI);
+					$ctx.fill();
+					$ctx.strokeStyle="#8ac7ff";
+					$ctx.stroke();
+					$ctx.closePath();
+					//让用户所在站点标记红色实心圆
+					if(i==j){
+						$ctx.beginPath();
+						$ctx.fillStyle="#f00";
+						$ctx.arc(30*j+30,0,10,0,2*Math.PI);
+						$ctx.fill();
+						$ctx.closePath();
+					}
+					//将画布定位在用户所在站点处
+					$("#mycanvas").css("left",-(j-4)*60);
+					//绘制站点数字
+					$ctx.beginPath();
+					$ctx.fillStyle="#888";
+					$ctx.strokeStyle="#8ac7ff";
+					$ctx.font=" 14px '微软雅黑'";
+					$ctx.textAlign="center";
+					$ctx.textBaseline="middle";
+					$ctx.fillText(i+1,x+10,0);
+					//让用户所在站点数字颜色变为白色
+					if(i==j){
+						$ctx.fillStyle="#fff";
+						$ctx.fillText(i+1,x+10,0);
+					}
+					$ctx.stroke();
+			
+					
+					//绘制站点之间连接线
+					if(i<len-1){
+						$ctx.beginPath();
+						$ctx.lineWidth=10;
+						$ctx.moveTo(x+23,0);
+						$ctx.lineTo(x+75,0);
+						$ctx.stroke();
+						$ctx.closePath();
+					}
+	//				判断站点是否为用户所在站点，用户所在为红色
+				 	if(i==j){
+				 		$ctx.fillStyle="red";
+				 	}else{
+				 		$ctx.fillStyle="#000"
+				 	}
+				 	//竖排写入站点名
+					function text(){
+						//替换字符串中的括号
+						var _a = Str.replace(/(\(|\（)/,"︵");
+						var _b = _a.replace(/(\)|\）)/,"︶");
+						//截取字符串循环输入
+						for(var i=0;i<_b.length;i++){
+							var ss;                // 声明变量。
+						 	ss = _b.substr(i,1); // 获取子字符串。
+						 	$ctx.font=" 18px '微软雅黑'";
+						 	$ctx.beginPath();
+							$ctx.fillText(ss,x+10,i*20+30,36);       // 写字。
+							$ctx.closePath();
+						}
+					}
+					text();
+					$ctx.restore();
+				}
+			}
+	//		调用绘制方法，并绘制
+			for(var i=0;i<len;i++){
+				var num = 30*i;
+				function aa(){site.call(this,20+num,i,str[i],j);}
+				var a = new aa();
+				a.draw();
+			}
+			
+	
+			
+			
+			//***************左右拖动***************
+			var isdrag=false;   
+			var tx,x;    
+			$(function(){  
+			    document.getElementById("mycanvas").addEventListener('touchend',function(){  
+			        isdrag = false;  
+			    });  
+			    document.getElementById("mycanvas").addEventListener('touchstart',selectmouse);  
+			    document.getElementById("mycanvas").addEventListener('touchmove',movemouse);  
+			});  
+			function movemouse(e){  
+				event.preventDefault(); //阻止触摸事件的默认行为，即阻止滚屏
+			  if (isdrag){   
+			   var n = tx + e.touches[0].clientX - x; 
+			   var canX = $("#mycanvas").width();
+			   var pingX = $(window).width();
+			   if(n>0){
+			   		n=0;
+			   }else if(n<(pingX-canX)){
+			   		n=pingX-canX;
+			   }
+			   
+			   $("#mycanvas").css("left",n);  
+			   return false;   
+			   }   
+			}   
+			function selectmouse(e){  
+				event.preventDefault(); //阻止触摸事件的默认行为，即阻止滚屏
+			   isdrag = true;   
+			   tx = parseInt(document.getElementById("mycanvas").style.left+0);   
+			   x = e.touches[0].clientX;    
+			   return false;   
+			}   
+		</script>
+		<script type="text/javascript">
+			$(".shoucang").on("touchstart",function(){
+				$(".zhezhaoceng").show();
+			});
+			$(".quxiao").on("touchstart",function(){
+				$(".zhezhaoceng").hide();
+			});
+		</script>
+	</body>
+</html>

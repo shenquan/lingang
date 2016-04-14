@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="X-UA-compatible" content="IE=edge"/>
+		<meta name="apple-mobile-web-app-capable" content="yes">
+	    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	    <meta name="format-detection" content="telephone=no">
+	    <meta name="format-detection" content="email=no">
+		<link rel="stylesheet" type="text/css" href="currentBusInfo/reset.css"/>
+		<style type="text/css">
+			.clearfix:after, .clearfix:before {content: ""; display: block; height:0; clear:both; visibility: hidden;}
+			.clearfix { *zoom:1; }
+			body{margin: 0 auto;background-color: #f2f2f2;width:100%;overflow: hidden;}
+			/***********header头部样式*************/
+			header{width:100%;background-color: #5f91f9;padding: 10px 0;font-size: 1.4rem;}
+			header a{float: left;margin-top: -8px;}
+			header img{max-height: 46px;max-width: 46px;}
+			h1{width: 100%;text-align: center;margin-left: -46px;color: #fff;}
+			
+			/*********站点*************/
+			.site_name{padding: 10px 20px;background-color: #fff;border-bottom: 1px solid #ccc;}
+			.site_name span{font-size: 18px;color: #000;}
+			.site_name p{font-size: 14px;color: #aaa;}
+			
+			/***********经此站的所有路线*************/
+			.bus{background-color: #fff;margin-top: 10px;width: 100%;overflow-y: scroll;}
+			.bus li{border-bottom: 1px solid #dedede;padding: 10px 20px;}
+			.bus li:first-child{border-top: 1px solid #e0e0e0;}
+			.bus li .checi,.bus li img{float: left;}
+			.bus li img{width: 35px;height: 35px;}
+			.bus li .checi span{font-size: 18px;color: #333;width: 50px;}
+			.bus li .checi p{font-size: 14px;color: #aaa;}
+			.bus li .right{float: right;font-size: 14px;color: #999;line-height:50px;height:50px;}
+		</style>
+	</head>
+	<body>
+		<!--header-->
+		<header>
+			<a href="#" onClick="javascript :history.back(-1);"><img src="img/fanhui.png"/></a>
+			<h1>站点信息</h1>
+		</header>
+		<!--站名-->
+		<section class="site_name">
+			<span>象园头站</span><p>途经4条线路</p>
+		</section>
+		<!--公交车路线-->
+		<section class="bus">
+			<ul>
+				<li>
+					<img src="img/bus2.png"/>
+					<div class="checi"><span>129路</span><p>开往&nbsp;鳌兴路</p></div>
+					<div class="right">等待发车</div>
+					<div class="clearfix"></div>
+				</li>
+				<li>
+					<img src="img/bus2.png"/>
+					<div class="checi"><span>108路</span><p>开往&nbsp;火车站</p></div>
+					<div class="right">距离本站大约10分钟</div>
+					<div class="clearfix"></div>
+				</li>
+				<li>
+					<img src="img/bus2.png"/>
+					<div class="checi"><span>88路</span><p>开往&nbsp;海洋公园</p></div>
+					<div class="right">等待发车</div>
+					<div class="clearfix"></div>
+				</li>
+				<li>
+					<img src="img/bus2.png"/>
+					<div class="checi"><span>312路</span><p>开往&nbsp;软件园C区</p></div>
+					<div class="right">距离本站大约2分钟</div>
+					<div class="clearfix"></div>
+				</li>
+			</ul>
+		</section>
+		<script src="currentBusInfo/jquery-2.1.4.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		//动态设置高度
+			var _xlh = $(window).height()-[$(".bus").offset().top-$(document).scrollTop()];
+			$(".bus").css("max-height",_xlh);
+		</script>
+	</body>
+</html>
