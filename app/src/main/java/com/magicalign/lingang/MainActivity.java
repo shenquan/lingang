@@ -1,6 +1,7 @@
 package com.magicalign.lingang;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.webkit.WebView;
@@ -43,4 +44,14 @@ public class MainActivity extends Activity {
 
         return super.onKeyDown(keyCode, event);
     }
+    //只显示一次启动页（App没被kill的情况下）
+    /*@Override
+    public void onBackPressed() {
+        // super.onBackPressed(); 	不要调用父类的方法
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }*/
+
 }
