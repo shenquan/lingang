@@ -7,6 +7,11 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <!-- 没有NoActionBar -->
+    <style name="AppTheme.NoActionBar" parent="android:Theme.Holo.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+    <!-- 没有NoActionBar，且全屏 -->
     <style name="AppTheme.NoActionBar.FullScreen" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
         <!-- Customize your theme here. -->
     </style>
