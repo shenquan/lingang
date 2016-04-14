@@ -14,7 +14,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getActionBar().hide();
+//        getActionBar().hide();
 
         webView = (WebView) findViewById(R.id.webview);
         webView.loadUrl("file:///android_asset/1_0ShouYe.html");
