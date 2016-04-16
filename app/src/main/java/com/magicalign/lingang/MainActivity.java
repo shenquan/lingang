@@ -91,8 +91,9 @@ public class MainActivity extends Activity {
             if (secondTime - mFirstTime > 750) {
                 mFirstTime = secondTime;
                 showToast("再按一次退出应用", 1000);
-                return true;
+                return true;//必须返回
             } else {
+                finish();//加上这个先结束当前activity  退出时会比较流畅
                 System.exit(0);
             }
         }
