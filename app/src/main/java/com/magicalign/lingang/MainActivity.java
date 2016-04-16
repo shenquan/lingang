@@ -18,8 +18,10 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+    public Toast mToast;
     private WebView mWebView;
     private Context mContext;
+    private long mFirstTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,22 +53,51 @@ public class MainActivity extends Activity {
     //重写按下返回键的效果
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (mWebView.canGoBack() && keyCode == KeyEvent.KEYCODE_BACK) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && mWebView.canGoBack()) {
             mWebView.goBack();
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
-    //只显示一次启动页（App没被kill的情况下）
-    /*@Override
+/*
+//只显示一次启动页（App没被kill的情况下）
+    @Override
     public void onBackPressed() {
+
+
         // super.onBackPressed(); 	不要调用父类的方法
         Intent intent = new Intent(Intent.ACTION_MAIN);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addCategory(Intent.CATEGORY_HOME);
         startActivity(intent);
-    }*/
+
+
+    }
+*/
+
+    /**
+     * 设置连续2次点击退出程序
+     *
+     * @param keyCode
+     * @param event
+     * @return
+     */
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            long secondTime = System.currentTimeMillis();
+            //如果间隔大于750ms则不退出
+            if (secondTime - mFirstTime > 750) {
+                mFirstTime = secondTime;
+                showToast("再按一次退出应用", 1000);
+                return true;
+            } else {
+                System.exit(0);
+            }
+        }
+        return super.onKeyUp(keyCode, event);
+    }
 
     /**
      * 判断GPS是否开启
@@ -118,16 +149,33 @@ public class MainActivity extends Activity {
     }
 
     /**
-     *
+     * 检测网络
      */
     private void isNetworkConnected() {
         ConnectivityManager connectivity = (ConnectivityManager) mContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo ni = connectivity.getActiveNetworkInfo();
-            if (!(ni != null && ni.isConnectedOrConnecting())) {
-                // 当前网络是未连接的
-                    Toast.makeText(mContext, "当前网络未连接", Toast.LENGTH_LONG).show();
-            }
+        NetworkInfo ni = connectivity.getActiveNetworkInfo();
+        if (!(ni != null && ni.isConnectedOrConnecting())) {
+            // 当前网络是未连接的
+            showToast("当前网络未连接", Toast.LENGTH_LONG);
+        }
+
+    }
+
+    /**
+     * 只显示一次Toast
+     *
+     * @param msg      显示信息
+     * @param showTime 显示时间
+     */
+    public void showToast(String msg, int showTime) {
+        if (mToast == null) {
+            mToast = Toast.makeText(mContext, msg, showTime);
+        } else {
+            mToast.setText(msg);
+        }
+
+        mToast.show();
 
     }
 
