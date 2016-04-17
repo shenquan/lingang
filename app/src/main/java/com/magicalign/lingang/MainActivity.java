@@ -6,6 +6,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -29,7 +30,12 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 //        getActionBar().hide();
         mContext = getApplicationContext();
-//检测GPS
+        //下面3行代码，显示请求权限
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        String provider = LocationManager.GPS_PROVIDER;
+        Location location = locationManager.getLastKnownLocation(provider);
+
+        //检测GPS
         isGpsOpen();
         //检测网络
         isNetworkConnected();
