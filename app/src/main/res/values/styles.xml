@@ -10,6 +10,8 @@
     <!-- 没有NoActionBar -->
     <style name="AppTheme.NoActionBar" parent="android:Theme.Holo.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <!--加上NoTitle-->
+        <item name="android:windowNoTitle">true</item>
     </style>
     <!-- 没有NoActionBar，且全屏 -->
     <style name="AppTheme.NoActionBar.FullScreen" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
@@ -17,7 +19,7 @@
 
     </style>
     <!--启动页闪屏解决方法一：修改背景-->
-    <style name="AppTheme.AppStartLoad" parent="android:Theme">
+    <style name="AppTheme.AppStartLoad" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
         <item name="android:windowBackground">@mipmap/qidongye</item>
         <item name="android:windowNoTitle">true</item>
 
